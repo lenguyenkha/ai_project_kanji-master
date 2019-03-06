@@ -7,5 +7,6 @@ RANDOM_STATE = 2018
 NO_EPOCHS = 100
 BATCH_SIZE = 128
 
-IS_LOCAL = False
+IS_LOCAL = True
+MODEL_NAME = 'my_model_kanji.h5'
 
