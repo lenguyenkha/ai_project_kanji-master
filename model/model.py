@@ -39,3 +39,5 @@ class Model:
     def check_model(self):
         self.model.summary()
 
+
+
