@@ -8,3 +8,4 @@ NO_EPOCHS = 100
 BATCH_SIZE = 128
 
 IS_LOCAL = False
+
