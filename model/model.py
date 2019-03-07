@@ -1,5 +1,6 @@
 from tensorflow.python.keras.models import Sequential, load_model
 from tensorflow.python.keras.layers import Dense, Flatten, Conv2D, Dropout, MaxPooling2D, BatchNormalization
+import keras
 from config.config import *
 
 
@@ -54,3 +55,4 @@ class Model:
 
     def load_model(self, model_name):
         self.model = load_model(model_name)
+

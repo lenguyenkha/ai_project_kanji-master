@@ -34,11 +34,11 @@ print("KMNIST character map shape:", char_df.shape)
 
 print('Percent for each category:', np.bincount(train_labels) / len(train_labels) * 100)
 
-labels = char_df['char']
-f, ax = plt.subplots(1, 1, figsize=(8, 6))
-g = sns.countplot(train_labels)
-g.set_title("Number of labels for each class")
-g.set_xticklabels(labels)
+# labels = char_df['char']
+# f, ax = plt.subplots(1, 1, figsize=(8, 6))
+# g = sns.countplot(train_labels)
+# g.set_title("Number of labels for each class")
+# g.set_xticklabels(labels)
 
 
 def plot_sample_images_data(images, labels, name):
@@ -53,10 +53,6 @@ def plot_sample_images_data(images, labels, name):
             plt.grid(False)
             plt.imshow(imgs[j], cmap=plt.cm.binary)
             plt.xlabel(lbls[j])
-
-
-plot_sample_images_data(train_images, train_labels, 'train')
-plot_sample_images_data(test_images, test_labels, 'test')
 
 
 # data preprocessing
@@ -102,23 +98,14 @@ def get_count_per_class(yd):
         percent = (count / total_samples) * 100
         print("{}({}):   {} or {}%".format(label, label_char, count, percent))
 
-
-# the class imbalance for the resulted training set.
-plot_count_per_class(np.argmax(y_train, axis=1))
-get_count_per_class(np.argmax(y_train, axis=1))
-
-# the class distribution of validation set.
-plot_count_per_class(np.argmax(y_val, axis=1))
-get_count_per_class(np.argmax(y_val, axis=1))
-
-# Init model
-model_class = Model()
-if os.path.exists('model/' + MODEL_NAME):
-    model_class.load_model(MODEL_NAME)
-else:
-    model_class.check_model()
-    history = model_class.run_model(X_train, y_train, X_val, y_val)
-    model_class.save_model()
+#
+# # the class imbalance for the resulted training set.
+# plot_count_per_class(np.argmax(y_train, axis=1))
+# get_count_per_class(np.argmax(y_train, axis=1))
+#
+# # the class distribution of validation set.
+# plot_count_per_class(np.argmax(y_val, axis=1))
+# get_count_per_class(np.argmax(y_val, axis=1))
 
 
 def plot_accuracy_and_loss(train_model):
@@ -139,7 +126,13 @@ def plot_accuracy_and_loss(train_model):
     ax[1].legend()
 
 
+# Init model
+model_class = Model()
+model_class.check_model()
+history = model_class.run_model(X_train, y_train, X_val, y_val)
+model_class.save_model()
 plot_accuracy_and_loss(history)
+
 
 # get the predictions for the test data
 predicted_classes = model_class.model.predict_classes(X_val)
@@ -153,4 +146,5 @@ print("Incorrect predicted classes:", incorrect.shape[0])
 target_names = ["Class {} ({}):".format(i, char_df[char_df['index'] == i]['char'].item()) for i in range(NUM_CLASSES)]
 print(classification_report(y_true, predicted_classes, target_names=target_names))
 
-plt.show()
+# plt.show()
+
