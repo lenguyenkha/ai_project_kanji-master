@@ -130,7 +130,7 @@ def plot_accuracy_and_loss(train_model):
 model_class = Model()
 model_class.check_model()
 history = model_class.run_model(X_train, y_train, X_val, y_val)
-model_class.save_model()
+model_class.save_model(MODEL_NAME)
 plot_accuracy_and_loss(history)
 
 
