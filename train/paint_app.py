@@ -3,7 +3,16 @@ import numpy as np
 import pandas as pd
 import os
 from model.model import Model
+import matplotlib.pyplot as plt
 from config.config import *
+
+
+def plot_images(data_index, cmap="Blues"):
+    # Plot the sample images now
+    plt.subplots(figsize=(8, 6))
+    img = data_index
+    plt.imshow(img.reshape(IMG_ROWS, IMG_COLS), cmap=cmap)
+
 
 
 def main():
@@ -60,12 +69,14 @@ def main():
 
             image = cv2.resize(image, (28, 28))
             image = np.array(image, dtype=np.float32)[None, None, :, :]
+            plot_images(image, "Reds")
             x_shaped_array = image.reshape(1, IMG_ROWS, IMG_COLS, 1)
             out_x = x_shaped_array / 255
             predicted_classes = model_class.model.predict_classes(out_x)
             target_names = ["Class {} ({}):".format(predicted_classes[0],
                                                     char_df[char_df['index'] == predicted_classes[0]]['char'].item())]
             print(target_names)
+            plt.show()
             image = np.zeros((480, 640, 3), dtype=np.uint8)
             ix = -1
             iy = -1
